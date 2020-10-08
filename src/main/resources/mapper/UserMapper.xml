@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.dorm.mapper.UserMapper">
+
+    <select id="selectTbUser" parameterType="net.dorm.bean.TbUser" resultType="net.dorm.bean.TbUser">
+        select * from tb_user where id = #{id} and password = #{password}
+    </select>
+
+    <select id="selectTbAdmin" parameterType="net.dorm.bean.TbAdmin" resultType="net.dorm.bean.TbAdmin">
+        select * from tb_admin where id = #{id} and password = #{password}
+    </select>
+
+    <select id="selectAllDorm" resultType="net.dorm.bean.TbDorm">
+        select * from tb_dormitory
+    </select>
+
+    <select id="selectDorm" resultType="net.dorm.bean.TbDorm" >
+            select * from tb_dormitory where building= #{building} and room =#{room}
+    </select>
+
+    <select id="selectDormByInput" parameterType="net.dorm.bean.TbDorm"  resultType="net.dorm.bean.TbDorm" >
+            select * from tb_dormitory where building= #{building} and room =#{room}
+    </select>
+
+
+    <select id="selectTbUserById" parameterType="int" resultType="String">
+        select username from tb_user where id = #{id}
+    </select>
+
+    <update id="updateDormFee" parameterType="net.dorm.bean.TbDorm">
+        update tb_dormitory set water = #{water},electricity=#{electricity} where building=#{building} and room=#{room}
+    </update>
+
+    <insert id="insertDorm" parameterType="net.dorm.bean.TbDorm">
+        insert into tb_dormitory(building,room,water,electricity,mem1id,mem2id,mem3id,mem4id) value(#{building},#{room},#{water},#{electricity}
+        ,#{mem1id},#{mem2id},#{mem3id},#{mem4id})
+    </insert>
+
+    <delete id="deleteDorm" >
+           delete from tb_dormitory where building= #{building} and room =#{room}
+    </delete>
+
+    <update id="updateDorm" parameterType="net.dorm.bean.TbDorm">
+        update tb_dormitory set water = #{water},electricity = #{electricity},mem1id=#{mem1id},mem2id=#{mem2id},mem3id=#{mem3id},mem4id=#{mem4id} where building=#{building} and room=#{room}
+    </update>
+</mapper>
